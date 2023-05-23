@@ -1,0 +1,69 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixin" as *;
+@use "../../styles/partials/fonts" as *;
+
+.videos {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @include tablet {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+  }
+
+  &__title {
+    font-size: 0.8rem;
+    color: $light-gray;
+    text-transform: uppercase;
+    padding-bottom: 1rem;
+
+    @include tablet {
+      padding-bottom: 1.6rem;
+    }
+  }
+
+  &__box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+
+    @include tablet {
+      width: 18rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__image {
+    background-color: $dark-gray;
+    border-radius: 4px;
+    width: 6.5rem;
+    height: 3.8rem;
+    object-fit: cover;
+  }
+
+  &__info {
+    align-self: center;
+  }
+
+  &__name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.125rem;
+    margin-bottom: 0.4rem;
+    color: $light-black;
+
+    @include desktop {
+      line-height: 1.2rem;
+    }
+  }
+
+  &__channel {
+    font-size: 0.8rem;
+    line-height: 18px;
+    @include desktop {
+      font-size: 0.9rem;
+    }
+  }
+}
