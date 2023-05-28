@@ -12,18 +12,19 @@ import videosList from "./assets/Data/videos.json";
 import "./App.scss";
 
 function App() {
-  // useState for Array of Videos
-  const [videos, setVideoData] = useState(videosList);
+  return (
+    <>
+      <BrowserRouter>
+        {/* <Header DarkMode={DarkMode} setDarkMode={setDarkMode} /> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="videos/:videoId" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 
-  // useState for Single Video
-  const [selectedVideo, setSelectedVideo] = useState(videoData[0]);
-
-  // Function to handle video click event
-  const handleVideoClick = (id) => {
-    // Find the clicked video from the array of videos
-    const newVideo = videoData.find((video) => video.id === id);
-    // Update the selectedVideo state with the new video
-    setSelectedVideo(newVideo);
   };
 
   return (
