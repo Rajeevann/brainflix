@@ -1,68 +1,92 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import VideoDetails from "../../components/VideoDetails/VideoDetails";
-import Comments from "../../components/Comments/Comments";
+import Button from "../../components/Button/Button";
+import UploadVideo from "../../assets/Images/UploadVideo.jpg";
+import "./Upload.scss";
 
-import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
-import Videos from "../../components/Videos/Videos";
+function Upload() {
+  const navigate = useNavigate();
+  const [videoTitle, setTitle] = useState("");
+  const [videoDescription, setDescription] = useState("");
 
-import axios from "axios";
+  const handleChangeTitle = (event) => {
+    setTitle(event.target.value);
+  };
 
-const APIKey = "c8a754e2-d83a-4279-87b4-acf70c3852ff";
-const api = "https://project-2-api.herokuapp.com";
+  const handleChangeDescription = (event) => {
+    setDescription(event.target.value);
+  };
 
-function Home() {
-  const [videos, setVideoData] = useState([]); //array of videos
-  const [selectedVideo, setSelectedVideo] = useState({}); //single video
-  const { videoId } = useParams();
-
-  useEffect(() => {
-    getVideos();
-  }, []);
-
-  useEffect(() => {
-    if (videoId) {
-      getVideo(videoId);
-    } else if (videos.length) {
-      getVideo(videos[0].id);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (videoTitle === "" || videoDescription === "") {
+      alert("Please fill in all fields");
+    } else {
+      alert("Thank you for uploading!");
+      navigate("/");
     }
-  }, [videoId, videos]);
-
-  function getVideo(videoId) {
-    axios
-      .get(`${api}/videos/${videoId}?api_key=${APIKey}`)
-      .then((response) => {
-        setSelectedVideo(response.data);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  }
-
-  function getVideos() {
-    axios
-      .get(`${api}/videos?api_key=${APIKey}`)
-      .then((response) => {
-        setVideoData(response.data);
-      })
-      .catch((error) => {
-        console.log("error:", error);
-      });
-  }
+  };
 
   return (
     <>
-      <VideoPlayer selectedVideo={selectedVideo} />
-      <div className="wrapper">
-        <div className="container">
-          <VideoDetails selectedVideo={selectedVideo} />
-          <Comments selectedVideoComments={selectedVideo.comments} />
+      <section className="form">
+        <h1 className="form__title">Upload Video</h1>
+        <div className="form__container">
+          <form
+            onSubmit={(event) => handleSubmit(event)}
+            id="form__form"
+            className="form__form"
+          >
+            <div className="form__info">
+              <div className="form__box">
+                <label className="form__subtitle">Video Thumbnail</label>
+                <img
+                  src={UploadVideo}
+                  className="form__thumbnail"
+                  alt="thumbnail"
+                ></img>
+              </div>
+              <div className="form__wrapper">
+                <label htmlFor="name" className="form__label--title">
+                  Title your video{" "}
+                </label>
+                <input
+                  id="name"
+                  className="form__input--title"
+                  type="text"
+                  placeholder="Add a title to your video"
+                  name="videoTitle"
+                  onChange={handleChangeTitle}
+                  value={videoTitle}
+                />
+
+                <label
+                  htmlFor="description"
+                  className="form__label--description"
+                >
+                  Add a video description{" "}
+                </label>
+                <textarea
+                  id="description"
+                  className="form__input--description"
+                  placeholder="Add a description to your video"
+                  rows="5"
+                  cols="30"
+                  name="videoDescription"
+                  onChange={handleChangeDescription}
+                  value={videoDescription}
+                ></textarea>
+              </div>
+            </div>
+            <div className="form__buttons">
+              <Button className="btn--cancel" text="Cancel" link="/" />
+              <Button type="button" className="btn--publish" text="Publish" />
+            </div>
+          </form>
         </div>
-        <Videos videos={videos} selectedVideo={selectedVideo} />
-      </div>
+      </section>
     </>
   );
 }
-
-export default Home;
+export default Upload;

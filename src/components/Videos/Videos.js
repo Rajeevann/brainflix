@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
 import "./Videos.scss";
 
 function Videos(props) {
-
+// Obtained from ChatGPT & Stackoverflow 
+//https://stackoverflow.com/questions/42261524/how-to-window-scrollto-with-a-smooth-effect
   function scrollToTop (){
     window.scrollTo({top:0, behavior: "smooth"})
   }
@@ -22,7 +24,7 @@ function Videos(props) {
             >
             <div className="videos__picture"
             >
-              <img className="videos__image" src={video.image} />
+              <img className="videos__image" src={video.image} alt="VideoImage"/>
             </div>
             <div className="videos__info">
               <p className="videos__name">{video.title}</p>
