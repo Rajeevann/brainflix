@@ -1,7 +1,15 @@
+import { Link } from "react-router-dom";
 import "./Button.scss";
 
 function Button(props) {
-  // Render a button element with the provided class name and text
+  if (props.link) {
+    return (
+      <Link to={props.link} className={`btn ${props.className}`}>
+        {props.text}
+      </Link>
+    );
+  }
+
   return (
     <button type="submit" className={`btn ${props.className}`}>
       {props.text}
