@@ -7,7 +7,9 @@ function Header() {
   return (
     <header className="header">
       <div className="header__container">
+        <Link to="/" title='home'>
         <img src={logo} className="header__logo" alt="logo" />
+        </Link>
         <div className="header__search">
           <form id="header__form" className="header__form">
             {/* Label for the search input */}
@@ -24,7 +26,7 @@ function Header() {
           {/* Avatar image */}
           <img src={mohan} className="header__avatar" alt="avatar" />
           {/* Button to upload */}
-          <Button className="btn--upload" text="Upload" />
+          <Button className="btn--upload" text="Upload" link="/upload"/>
         </div>
       </div>
     </header>
