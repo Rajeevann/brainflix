@@ -14,13 +14,16 @@
   width: 100%;
   background-color: $dark-black;
   cursor: pointer;
+  height:11rem;
 
   @include tablet {
     padding: 0 2rem;
+    aspect-ratio: 16/9;
+    height:24rem;
   }
 
   @include desktop {
     padding: 0 14rem;
-    height: 30rem;
+    height: 70vh;
   }
 }
