@@ -9,8 +9,7 @@ import Videos from "../../components/Videos/Videos";
 
 import axios from "axios";
 
-const APIKey = "c8a754e2-d83a-4279-87b4-acf70c3852ff";
-const api = "https://project-2-api.herokuapp.com";
+const api = "http://localhost:3300/videos";
 
 function Home() {
   const [videos, setVideoData] = useState([]); //array of videos
@@ -31,7 +30,7 @@ function Home() {
 
   function getVideo(videoId) {
     axios
-      .get(`${api}/videos/${videoId}?api_key=${APIKey}`)
+      .get(`${api}/${videoId}`)
       .then((response) => {
         setSelectedVideo(response.data);
       })
@@ -42,7 +41,7 @@ function Home() {
 
   function getVideos() {
     axios
-      .get(`${api}/videos?api_key=${APIKey}`)
+      .get(`${api}`)
       .then((response) => {
         setVideoData(response.data);
       })

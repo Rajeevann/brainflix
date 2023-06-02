@@ -4,6 +4,33 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import UploadVideo from "../../assets/Images/UploadVideo.jpg";
 import "./Upload.scss";
+import axios from 'axios';
+
+
+// function Upload() {
+//   const navigate = useNavigate();
+//   const [videoTitle, setTitle] = useState("");
+//   const [videoDescription, setDescription] = useState("");
+
+//   const handleChangeTitle = (event) => {
+//     setTitle(event.target.value);
+//   };
+
+//   const handleChangeDescription = (event) => {
+//     setDescription(event.target.value);
+//   };
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+
+//     if (videoTitle === "" || videoDescription === "") {
+//       alert("Please fill in all fields");
+//     } else {
+//       alert("Thank you for uploading!");
+//       navigate("/");
+//     }
+//   };
+
 
 function Upload() {
   const navigate = useNavigate();
@@ -18,15 +45,32 @@ function Upload() {
     setDescription(event.target.value);
   };
 
+
+  // ...
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (videoTitle === "" || videoDescription === "") {
-      alert("Please fill in all fields");
+  
+    if (videoTitle === '' || videoDescription === '') {
+      alert('Please fill in all fields');
     } else {
-      alert("Thank you for uploading!");
-      navigate("/");
+      const newVideoData = {
+        title: videoTitle,
+        description: videoDescription,
+      };
+  
+      axios
+        .post('http://localhost:3300/videos', {title:videoTitle,description:videoDescription})
+        .then(() => {
+          alert('Thank you for uploading!');
+          navigate('/');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
+
 
   return (
     <>
@@ -89,4 +133,8 @@ function Upload() {
     </>
   );
 }
+
+
+
+
 export default Upload;
